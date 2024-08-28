@@ -439,7 +439,7 @@ class LdapHandler
         $version = (int)$server->getConfiguration()->getVersion();
         $forceTLS = (int)$server->getConfiguration()->getForceTLS();
 
-        $ldapProtocol = $port == 636 || $forceTLS ? 'ldaps' : 'ldap';
+        $ldapProtocol = $port === 636 || $forceTLS ? 'ldaps' : 'ldap';
         $ldapUri = $ldapProtocol . '://' . $host . ':' . $port;
 
         try {
