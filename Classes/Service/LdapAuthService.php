@@ -297,7 +297,7 @@ class LdapAuthService extends AuthenticationService
             if (!$ok) {
                 // Failed login attempt (wrong password) - write that to the log!
                 if ($this->writeAttemptLog) {
-                    $this->writelog(255, 3, 3, 1, "Login-attempt from %s (%s), username '%s', password not accepted!", [$this->info['REMOTE_ADDR'], $this->info['REMOTE_HOST'], $this->username]);
+                    $this->writelog(255, 3, 3, 1, "Login-attempt from %s (%s), username '%s', password not accepted!", [$this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $this->username]);
                 }
                 if (1 == $this->logLevel) {
                     $msg = 'Password not accepted';
