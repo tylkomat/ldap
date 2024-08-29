@@ -311,14 +311,6 @@ class LdapAuthService extends AuthenticationService
 
             $ok = $ok ? 200 : ($this->conf['onlyLDAP'] ? 0 : 100);
         }
-        if ($ok && isset($user['lockToDomain']) && $user['lockToDomain'] != $this->authInfo['HTTP_HOST']) {
-            // Lock domain didn't match, so error:
-            if ($this->writeAttemptLog) {
-                $this->writelog(255, 3, 3, 1, "Login-attempt from %s (%s), username '%s', locked domain '%s' did not match '%s'!", [$this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $user[$this->authInfo['db_user']['username_column']], $user['lockToDomain'], $this->authInfo['HTTP_HOST']]);
-                // GeneralUtility::sysLog(sprintf("Login-attempt from %s (%s), username '%s', locked domain '%s' did not match '%s'!", $this->authInfo['REMOTE_ADDR'], $this->authInfo['REMOTE_HOST'], $user[$this->authInfo['db_user']['username_column']], $user['lockToDomain'], $this->authInfo['HTTP_HOST']), 'Core', 0);
-            }
-            $ok = 0;
-        }
 
         $parameters = [
             'username' => $this->username,
